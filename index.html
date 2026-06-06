@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddhesh Gawde | Data Analytics Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* CSS Variables & Theming */
+        :root {
+            --bg-color: #0b1120; /* Deep slate dark */
+            --surface-color: rgba(30, 41, 59, 0.7);
+            --primary-accent: #06b6d4; /* Cyan */
+            --secondary-accent: #3b82f6; /* Blue */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        a { text-decoration: none; color: inherit; transition: color 0.3s; }
+        ul { list-style: none; }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5 { color: #fff; margin-bottom: 1rem; }
+        h1 { font-size: 3.5rem; font-weight: 700; line-height: 1.2; background: linear-gradient(to right, var(--primary-accent), var(--secondary-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; }
+        h3 { font-size: 1.5rem; }
+        p { margin-bottom: 1rem; color: var(--text-muted); }
+
+        /* Utility Classes (Glassmorphism & Layout) */
+        .glass { background: var(--surface-color); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 16px; padding: 2rem; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .glass:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(6, 182, 212, 0.1); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .section { padding: 6rem 0; }
+        
+        /* Buttons */
+        .btn { display: inline-block; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; border: none; text-align: center;}
+        .btn-primary { background: linear-gradient(135deg, var(--secondary-accent), var(--primary-accent)); color: white; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3); }
+        .btn-primary:hover { box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5); transform: translateY(-2px); color: white;}
+        .btn-outline { background: transparent; border: 2px solid var(--primary-accent); color: var(--primary-accent); }
+        .btn-outline:hover { background: rgba(6, 182, 212, 0.1); color: var(--primary-accent);}
+        
+        /* Navigation */
+        nav { position: fixed; width: 100%; top: 0; z-index: 1000; background: rgba(11, 17, 32, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--glass-border); padding: 1.2rem 0; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: white; }
+        .logo span { color: var(--primary-accent); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { font-weight: 600; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--primary-accent); }
+        
+        /* Hero Section */
+        .hero { display: flex; align-items: center; min-height: 100vh; padding-top: 5rem; }
+        .hero-content { flex: 1; padding-right: 2rem; }
+        .hero-image-container { flex: 1; display: flex; justify-content: center; align-items: center; }
+        .hero-image { width: 350px; height: 350px; border-radius: 50%; border: 4px solid var(--primary-accent); object-fit: cover; box-shadow: 0 0 40px rgba(6, 182, 212, 0.2); }
+        .hero-buttons { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; margin-bottom: 2rem;}
+        .social-links { display: flex; gap: 1.5rem; font-size: 1.5rem; }
+        .social-links a:hover { color: var(--primary-accent); transform: scale(1.1); }
+
+        /* About Section */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .highlights { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+        .highlight-tag { background: rgba(6, 182, 212, 0.1); color: var(--primary-accent); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.875rem; font-weight: 600; border: 1px solid rgba(6, 182, 212, 0.2); }
+        
+        /* CGPI Badge Styling */
+        .cgpi-container { text-align: center; margin-bottom: 0.75rem; }
+        .cgpi-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(59, 130, 246, 0.15)); border: 1px solid var(--primary-accent); color: #fff; padding: 0.6rem 1.2rem; border-radius: 30px; font-size: 1.05rem; font-weight: 600; box-shadow: 0 4px 20px rgba(6, 182, 212, 0.15); }
+        .cgpi-badge i { color: var(--primary-accent); }
+        .cgpi-badge span { color: var(--primary-accent); font-weight: 700; }
+
+        /* Skills Section */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .skill-tag { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 0.6rem 1.2rem; border-radius: 8px; font-size: 0.95rem; color: #fff; transition: all 0.3s ease; }
+        .skill-tag:hover { background: rgba(6, 182, 212, 0.1); border-color: var(--primary-accent); color: var(--primary-accent); transform: translateY(-2px); }
+
+        /* Services & Grid Cards */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .service-card { text-align: center; }
+        .service-card i { font-size: 3rem; color: var(--primary-accent); margin-bottom: 1.5rem; }
+        
+        /* Interactive Card Links */
+        .project-link, .cert-link { display: block; color: inherit; text-decoration: none; }
+        
+        /* Projects Section */
+        .project-card { padding: 0; overflow: hidden; display: flex; flex-direction: column; height: 100%; }
+        .project-img { width: 100%; height: 220px; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: rgba(255,255,255,0.05); transition: color 0.3s ease; }
+        .project-link:hover .project-img { color: var(--primary-accent); }
+        .project-info { padding: 2rem; flex: 1; display: flex; flex-direction: column;}
+        .project-tools { margin-bottom: 1rem; font-size: 0.875rem; color: var(--primary-accent); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;}
+        .project-features { margin: 1rem 0; padding-left: 1.2rem; color: var(--text-muted); font-size: 0.95rem; flex: 1;}
+        .project-features li { margin-bottom: 0.5rem; }
+        .project-title-area { display: flex; justify-content: space-between; align-items: center; }
+        .project-title-area i { color: var(--primary-accent); font-size: 1.4rem; }
+        
+        /* Certifications Styling */
+        .cert-card { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 150px; position: relative; border: 1px solid var(--glass-border);}
+        .cert-card i { font-size: 1.8rem; color: var(--primary-accent); margin-bottom: 1rem; transition: transform 0.3s ease;}
+        .cert-link:hover .cert-card i { transform: scale(1.2); color: #fff;}
+        .cert-link:hover .glass { border-color: var(--primary-accent); box-shadow: 0 10px 30px rgba(6, 182, 212, 0.15); }
+
+        /* Experience */
+        .experience-card { max-width: 800px; margin: 0 auto; position: relative;}
+        .experience-card h3 { color: var(--primary-accent); margin-bottom: 0.2rem;}
+        .duration { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 1.5rem; display: block; font-style: italic;}
+
+        /* Contact Section */
+        .contact-wrap { display: grid; grid-template-columns: 1fr 2fr; gap: 3rem; }
+        .contact-info-item { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+        .contact-info-item i { font-size: 1.5rem; color: var(--primary-accent); width: 30px; text-align: center;}
+        .form-group { margin-bottom: 1.5rem; }
+        .form-control { width: 100%; padding: 1rem 1.2rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); border-radius: 8px; color: white; font-family: inherit; font-size: 1rem; transition: border-color 0.3s; }
+        .form-control:focus { outline: none; border-color: var(--primary-accent); background: rgba(255, 255, 255, 0.05);}
+        textarea.form-control { height: 160px; resize: vertical; }
+
+        /* Footer */
+        footer { border-top: 1px solid var(--glass-border); padding: 4rem 0 2rem; text-align: center; margin-top: 4rem; background: rgba(11, 17, 32, 0.95); }
+        .footer-links { display: flex; justify-content: center; gap: 2.5rem; margin: 2rem 0; flex-wrap: wrap;}
+        .footer-links a { font-weight: 600; color: var(--text-muted); }
+        .footer-links a:hover { color: var(--primary-accent); }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .contact-wrap, .about-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .hero { flex-direction: column-reverse; text-align: center; padding-top: 8rem; justify-content: center;}
+            .hero-content { padding-right: 0; margin-top: 3rem; }
+            .hero-buttons, .social-links { justify-content: center; }
+            .hero-image { width: 280px; height: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-content">
+            <div class="logo">Siddhesh.G<span></span></div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero container">
+        <div class="hero-content">
+            <p style="color: var(--primary-accent); font-weight: 600; font-size: 1.1rem;">Hello, I'm</p>
+            <h1>Siddhesh Gawde</h1>
+            <h3>Turning Data into Actionable Insights</h3>
+            <p>B.Sc. Information Technology Graduate passionate about Data Analytics, Data Visualization, Reporting, and Business Intelligence.</p>
+            <p>I recently completed my B.Sc. in Information Technology and have built a strong foundation in data analysis, reporting, and problem-solving. I have hands-on experience with Excel, SQL, Python, Tableau, and Power BI. I enjoy transforming raw data into meaningful insights that support informed business decisions.</p>
+            
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="Siddhesh_Gawde_.pdf" download="Siddhesh_Gawde_Resume.pdf" class="btn btn-outline">Download Resume</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://linkedin.com/in/siddhesh-gawde1" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/siddheshgawde00707-ai" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:gawdesiddhesh63@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <div class="hero-image" style="background: url('portfolioimage3.jpeg') center/cover; background-position: top center;"></div>
+        </div>
+    </section>
+
+    <section id="about" class="section container">
+        <div class="cgpi-container">
+            <div class="cgpi-badge">
+                <i class="fas fa-graduation-cap"></i> Academic Performance: <span>8.14 CGPI</span>
+            </div>
+        </div>
+        
+        <h2>About Me & Education</h2>
+        <div class="about-grid">
+            <div class="glass">
+                <h3>Personal Summary</h3>
+                <p>Motivated and detail-oriented B.Sc. IT graduate with practical experience in data analytics, dashboard development, database management, and reporting. Skilled at cleaning, analyzing, and visualizing data to identify trends and generate actionable insights.</p>
+                <p><strong>Career Objective:</strong> Seeking opportunities to apply analytical skills, contribute to business growth, and continuously develop expertise in data analytics and business intelligence.</p>
+                
+                <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: white;">Core Highlights</h4>
+                <div class="highlights">
+                    <span class="highlight-tag">Quick Learner</span>
+                    <span class="highlight-tag">Strong Analytical Thinking</span>
+                    <span class="highlight-tag">Problem Solver</span>
+                    <span class="highlight-tag">Effective Team Communicator</span>
+                    <span class="highlight-tag">Adaptable Professional</span>
+                    <span class="highlight-tag">Detail-Oriented</span>
+                </div>
+            </div>
+            
+            <div class="glass">
+                <h3>Education</h3>
+                <div style="margin-top: 1.5rem;">
+                    <h4 style="color: var(--primary-accent); margin-bottom: 0.2rem; font-size: 1.25rem;">Bachelor of Science in Information Technology</h4>
+                    <span class="duration">2022 – 2025</span>
+                    
+                    <h5 style="color: white; margin: 1.5rem 0 0.8rem;">Relevant Coursework:</h5>
+                    <ul style="list-style-type: circle; padding-left: 1.5rem; color: var(--text-muted); line-height: 1.8;">
+                        <li>Database Management</li>
+                        <li>Statistics & Data Analytics Fundamentals</li>
+                        <li>Data Visualization</li>
+                        <li>Business Intelligence Concepts</li>
+                        <li>Computer Networking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section container">
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            
+            <div class="glass">
+                <h3 style="border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem; margin-bottom: 1.5rem;">Data Analytics</h3>
+                <div class="skills-list">
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">Data Cleaning & Transformation</span>
+                    <span class="skill-tag">Reporting & Dashboards</span>
+                    <span class="skill-tag">Trend Analysis</span>
+                </div>
+            </div>
+
+            <div class="glass">
+                <h3 style="border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem; margin-bottom: 1.5rem;">Programming & DB</h3>
+                <div class="skills-list">
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Pandas</span>
+                    <span class="skill-tag">NumPy</span>
+                    <span class="skill-tag">Database Management</span>
+                </div>
+            </div>
+
+            <div class="glass">
+                <h3 style="border-bottom: 1px solid var(--glass-border); padding-bottom: 1rem; margin-bottom: 1.5rem;">Visualization & Office</h3>
+                <div class="skills-list">
+                    <span class="skill-tag">Advanced Excel</span>
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Tableau</span>
+                    <span class="skill-tag">Microsoft Word</span>
+                    <span class="skill-tag">Microsoft PowerPoint</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="services" class="section container">
+        <h2>What I Do</h2>
+        <div class="grid-3">
+            <div class="glass service-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Data Analysis</h3>
+                <p>Transform raw datasets into meaningful, actionable business insights.</p>
+            </div>
+            <div class="glass service-card">
+                <i class="fas fa-filter"></i>
+                <h3>Data Cleaning</h3>
+                <p>Prepare, transform, and structure data for accurate reporting and analysis.</p>
+            </div>
+            <div class="glass service-card">
+                <i class="fas fa-layer-group"></i>
+                <h3>Dashboard Development</h3>
+                <p>Build interactive dashboards using Power BI, Tableau, and Microsoft Excel.</p>
+            </div>
+            <div class="glass service-card">
+                <i class="fas fa-database"></i>
+                <h3>SQL Database Analysis</h3>
+                <p>Query, extract, and analyze complex data from relational databases.</p>
+            </div>
+            <div class="glass service-card">
+                <i class="fas fa-chart-pie"></i>
+                <h3>Data Visualization</h3>
+                <p>Create impactful visual reports and professional business presentations.</p>
+            </div>
+            <div class="glass service-card">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <h3>Business Reporting</h3>
+                <p>Generate precise reports that support decision-making and performance tracking.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="section container">
+        <h2>Professional Experience</h2>
+        <div class="glass experience-card">
+            <h3>Data Analytics Intern</h3>
+            <h4 style="color: white; margin-bottom: 0.2rem; font-size: 1.1rem;">Cognifyz Internship Program</h4>
+            <span class="duration">November 2025 – December 2025</span>
+            
+            <h5 style="color: white; margin-top: 1.5rem; font-size: 1.05rem;">Responsibilities:</h5>
+            <ul style="list-style-type: disc; padding-left: 1.5rem; margin-bottom: 2rem; color: var(--text-muted); line-height: 1.8;">
+                <li>Analyzed cuisines, cities, price ranges, and delivery trends to understand restaurant performance.</li>
+                <li>Explored rating distributions and restaurant chains to identify business patterns.</li>
+                <li>Performed geographic and customer behavior analysis.</li>
+                <li>Conducted advanced review and voting analysis to uncover customer preferences and business strategies.</li>
+            </ul>
+            
+            <h5 style="color: white; font-size: 1.05rem;">Key Outcomes:</h5>
+            <ul style="list-style-type: circle; padding-left: 1.5rem; color: var(--text-muted); line-height: 1.8;">
+                <li>Improved analytical thinking through handling complex, real-world datasets.</li>
+                <li>Developed practical business intelligence and reporting skills.</li>
+                <li>Enhanced data visualization and insight-generation capabilities.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="projects" class="section container">
+        <h2>Featured Projects</h2>
+        <div class="grid-3">
+            
+            <a href="https://github.com/siddheshgawde00707-ai/Road-Accidents-Analysis.git" target="_blank" class="project-link">
+                <div class="glass project-card">
+                    <div class="project-img"><i class="fas fa-car-crash"></i></div>
+                    <div class="project-info">
+                        <h3 class="project-title-area">
+                            <span>Road Accidents Analysis</span>
+                            <i class="fab fa-github"></i>
+                        </h3>
+                        <p class="project-tools"><i class="fas fa-wrench"></i> Data Analytics Tools</p>
+                        <ul class="project-features" style="list-style-type: disc;">
+                            <li>Data Cleaning & Processing</li>
+                            <li>Accident Trend Analysis</li>
+                            <li>Casualty & Severity Dashboard</li>
+                            <li>Geospatial Insights</li>
+                        </ul>
+                        <p style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                            <strong style="color: white;">Outcome:</strong> Evaluated road safety metrics and visualised accident patterns to aid in preventative decision-making.
+                        </p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/siddheshgawde00707-ai/Sales-Market-Report" target="_blank" class="project-link">
+                <div class="glass project-card">
+                    <div class="project-img"><i class="fas fa-chart-bar"></i></div>
+                    <div class="project-info">
+                        <h3 class="project-title-area">
+                            <span>Sales Market Report</span>
+                            <i class="fab fa-github"></i>
+                        </h3>
+                        <p class="project-tools"><i class="fas fa-wrench"></i> MySQL Workbench, Tableau</p>
+                        <ul class="project-features" style="list-style-type: disc;">
+                            <li>Data Cleaning & Transformation</li>
+                            <li>Interactive Business Dashboards</li>
+                            <li>Trend Analysis</li>
+                            <li>Automated Reporting Workflows</li>
+                        </ul>
+                        <p style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                            <strong style="color: white;">Outcome:</strong> Converted raw sales data into meaningful visual reports that support business decision-making.
+                        </p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/siddheshgawde00707-ai/Flipkart-Sales-Analysis" target="_blank" class="project-link">
+                <div class="glass project-card">
+                    <div class="project-img"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="project-info">
+                        <h3 class="project-title-area">
+                            <span>Flipkart Sales Analysis</span>
+                            <i class="fab fa-github"></i>
+                        </h3>
+                        <p class="project-tools"><i class="fas fa-wrench"></i> Excel, Pivot Tables, Charts</p>
+                        <ul class="project-features" style="list-style-type: disc;">
+                            <li>KPI Tracking Dashboard</li>
+                            <li>Trend Analysis</li>
+                            <li>Performance Evaluation</li>
+                            <li>Sales Reporting</li>
+                        </ul>
+                        <p style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                            <strong style="color: white;">Outcome:</strong> Identified business performance trends and communicated insights through structured dashboards.
+                        </p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://github.com/siddheshgawde00707-ai/SuperStore-Sales-Performance-Insights-Dashboard.git" target="_blank" class="project-link">
+                <div class="glass project-card">
+                    <div class="project-img"><i class="fas fa-store"></i></div>
+                    <div class="project-info">
+                        <h3 class="project-title-area">
+                            <span>Superstore Sales Dashboard</span>
+                            <i class="fab fa-github"></i>
+                        </h3>
+                        <p class="project-tools"><i class="fas fa-wrench"></i> Excel, Power BI</p>
+                        <ul class="project-features" style="list-style-type: disc;">
+                            <li>Interactive Dashboard</li>
+                            <li>Regional Performance Analysis</li>
+                            <li>Product Category Insights</li>
+                            <li>Sales Forecasting</li>
+                        </ul>
+                        <p style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                            <strong style="color: white;">Outcome:</strong> Analyzed $2.3M+ sales data and developed forecasting models to support inventory and business planning.
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section id="certifications" class="section container">
+        <h2>Certifications</h2>
+        <div class="grid-3" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
+            
+            <a href="https://github.com/siddheshgawde00707-ai/Introduction-to-Data-Analytics.git" target="_blank" class="cert-link">
+                <div class="glass cert-card">
+                    <i class="fas fa-certificate"></i>
+                    <h4 style="color: white; margin:0; font-size: 1.1rem;">Introduction to Data Analytics</h4>
+                </div>
+            </a>
+
+            <a href="https://github.com/siddheshgawde00707-ai/Data-Analyst-Course.git" target="_blank" class="cert-link">
+                <div class="glass cert-card">
+                    <i class="fas fa-certificate"></i>
+                    <h4 style="color: white; margin:0; font-size: 1.1rem;">Data Analytics Projects</h4>
+                </div>
+            </a>
+
+            <a href="https://github.com/siddheshgawde00707-ai/Deloitte-Data-Analytics-Job-Certificate.git" target="_blank" class="cert-link">
+                <div class="glass cert-card">
+                    <i class="fas fa-certificate"></i>
+                    <h4 style="color: white; margin:0; font-size: 1.1rem;">Deloitte Data Analytics Internship</h4>
+                </div>
+            </a>
+
+            <a href="https://github.com/siddheshgawde00707-ai/Cognifyz-Technologies-Projects.git" target="_blank" class="cert-link">
+                <div class="glass cert-card">
+                    <i class="fas fa-certificate"></i>
+                    <h4 style="color: white; margin:0; font-size: 1.1rem;">Cognifyz Internship Program</h4>
+                </div>
+            </a>
+            
+        </div>
+    </section>
+
+    <section class="section container" style="text-align: center;">
+        <div class="glass" style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(6, 182, 212, 0.1));">
+            <h2>GitHub Showcase</h2>
+            <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem;">Explore my repositories, project code, database structures, and technology implementations directly on GitHub.</p>
+            <i class="fab fa-github" style="font-size: 5rem; color: white; margin-bottom: 2rem;"></i>
+            <br>
+            <a href="https://github.com/siddheshgawde00707-ai" target="_blank" class="btn btn-primary">Visit My GitHub Profile</a>
+        </div>
+    </section>
+
+    <section id="contact" class="section container">
+        <h2>Get In Touch</h2>
+        <div class="contact-wrap">
+            <div class="contact-info glass">
+                <h3 style="margin-bottom: 2rem; color: white;">Contact Information</h3>
+                
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4 style="color: var(--primary-accent); margin-bottom: 0.2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Email</h4>
+                        <p style="margin: 0; color: white; font-weight: 600;"><a href="mailto:gawdesiddhesh63@gmail.com">gawdesiddhesh63@gmail.com</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h4 style="color: var(--primary-accent); margin-bottom: 0.2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Phone</h4>
+                        <p style="margin: 0; color: white; font-weight: 600;">+91 7400257690</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4 style="color: var(--primary-accent); margin-bottom: 0.2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Location</h4>
+                        <p style="margin: 0; color: white; font-weight: 600;">Thane, Maharashtra, India</p>
+                    </div>
+                </div>
+                
+                <div class="contact-info-item">
+                    <i class="fab fa-linkedin"></i>
+                    <div>
+                        <h4 style="color: var(--primary-accent); margin-bottom: 0.2rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">LinkedIn</h4>
+                        <p style="margin: 0; color: white; font-weight: 600;"><a href="https://linkedin.com/in/siddhesh-gawde1" target="_blank">linkedin.com/in/siddhesh-gawde1</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form glass">
+                <h3 style="margin-bottom: 1.5rem; color: white;">Let's connect and discuss opportunities, projects, or collaborations.</h3>
+                <form onsubmit="event.preventDefault(); alert('Form submission functionality would go here.');">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 1rem;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2 style="margin-bottom: 0.5rem; font-size: 2rem; background: linear-gradient(to right, var(--primary-accent), var(--secondary-accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Siddhesh Gawde</h2>
+            <p style="font-size: 1.1rem;">Data Analyst | Problem Solver | Tech Enthusiast</p>
+            
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+            
+            <div class="social-links" style="justify-content: center; margin-bottom: 2rem;">
+                <a href="https://linkedin.com/in/siddhesh-gawde1" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/siddheshgawde00707-ai" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+            
+            <p style="font-size: 0.875rem; color: var(--text-muted); border-top: 1px solid var(--glass-border); padding-top: 2rem; margin: 0 auto; max-width: 600px;">
+                &copy; 2026 Siddhesh Gawde. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
