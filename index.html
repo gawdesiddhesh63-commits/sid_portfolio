@@ -127,6 +127,18 @@
         .footer-links a { font-weight: 600; color: var(--text-muted); }
         .footer-links a:hover { color: var(--primary-accent); }
         
+        /* See More Projects */
+        .project-hidden { display: none !important; }
+
+        .see-more-container {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        .see-more-btn {
+            min-width: 190px;
+        }
+
         /* Responsive Design */
         @media (max-width: 900px) {
             .contact-wrap, .about-grid { grid-template-columns: 1fr; }
@@ -476,6 +488,12 @@
                 </div>
             </a>
         </div>
+
+        <div class="see-more-container">
+            <button id="see-more-projects" class="btn btn-primary see-more-btn" type="button">
+                <i class="fas fa-chevron-down"></i> See More Projects
+            </button>
+        </div>
     </section>
 
     <section id="certifications" class="section container">
@@ -610,6 +628,41 @@
 
 <script>
 emailjs.init("Z77bixK00boXRuHha");
+
+// See More / Show Less Projects
+const projectLinks = document.querySelectorAll("#projects .project-link");
+const seeMoreButton = document.getElementById("see-more-projects");
+const initiallyVisibleProjects = 3;
+
+function hideExtraProjects() {
+    projectLinks.forEach((project, index) => {
+        if (index >= initiallyVisibleProjects) {
+            project.classList.add("project-hidden");
+        }
+    });
+}
+
+function showAllProjects() {
+    projectLinks.forEach(project => {
+        project.classList.remove("project-hidden");
+    });
+}
+
+hideExtraProjects();
+
+seeMoreButton.addEventListener("click", function () {
+    const isShowingMore = seeMoreButton.classList.contains("show-less");
+
+    if (isShowingMore) {
+        hideExtraProjects();
+        seeMoreButton.innerHTML = '<i class="fas fa-chevron-down"></i> See More Projects';
+        seeMoreButton.classList.remove("show-less");
+    } else {
+        showAllProjects();
+        seeMoreButton.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less Projects';
+        seeMoreButton.classList.add("show-less");
+    }
+});
 
 document.getElementById("contact-form").addEventListener("submit", function(e) {
 
